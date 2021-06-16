@@ -3,17 +3,24 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 
-// rootSaga is the primary saga.
-// It bundles up all of the other sagas so our project can use them.
-// This is imported in index.js as rootSaga
+import homeSaga from './homepage.saga';
+import viewArtifactsSaga from './viewartifacts.saga';
+import connectionSaga from './connections.saga';
+import addArtifactsSaga from './addartifact.saga';
+import addConnectionSaga from './addconnection.saga';
+import adminListSaga from './adminlist.saga';
 
-// some sagas trigger other sagas, as an example
-// the registration triggers a login
-// and login triggers setting the user
+
 export default function* rootSaga() {
   yield all([
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
+    homeSaga(),
+    viewArtifactsSaga(),
+    connectionSaga(),
+    addArtifactsSaga(),
+    addConnectionSaga(),
+    adminListSaga(),
   ]);
 }

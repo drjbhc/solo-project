@@ -47,4 +47,99 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+
+
+
+
+
+
+
+
+
+
+router.get('/userlist', rejectUnauthenticated, (req, res) => { // Admin page to approve new users
+  /*
+  Check user's clearance level.
+  If user is not admin (clearance 10) then reject request.
+  If user is admin do a query to the database to retrieve
+      username, application_comments, and is_approved keys from the users table
+  */
+
+      console.log(req.user)
+  if (req.user.id < 10) {
+      res.sendStatus(403);
+      return;
+  }
+
+  const queryText = `SELECT "id", "username", "is_approved", "application_comments" FROM "user";`;
+
+  pool.query(queryText).then(response => {
+      res.send(response.rows);
+  }).catch(error => {
+      console.log(`Error making database query ${queryText}`, error);
+      res.sendStatus(500);
+  })
+});
+
+
+
+
+router.get('/homepage', (req, res) => { // Homepage to list published tables
+
+  const queryText = `SELECT "id", "username" FROM "user" WHERE "table_published"=true;`;
+
+  pool.query(queryText).then(response => {
+      res.send(response.rows);
+  }).catch(error => {
+      console.log(`Error making database query ${queryText}`, error);
+      res.sendStatus(500);
+  })
+})
+
+
+router.put('/publish', rejectUnauthenticated, (req, res) => {
+  
+  const queryText = `UPDATE "user" SET "table_published"=true WHERE "id"=$1;`; // change =true so that it will set it to what it isn't
+
+  pool.query(queryText, [req.user.id]).then(response => {
+      res.sendStatus(201);
+  }).catch(error => {
+      console.log(`Error making database query ${queryText}`, error);
+      res.sendStatus(500);
+  })
+})
+
+
+router.put('/approve/:userID', rejectUnauthenticated, (req, res) => {
+
+  const userID = req.params.userID;
+  
+  const queryText = `UPDATE "user" SET "is_approved"=true WHERE "id"=$1;`;
+
+  pool.query(queryText, [userID]).then(response => {
+      res.sendStatus(201);
+  }).catch(error => {
+      console.log(`Error making database query ${queryText}`, error);
+      res.sendStatus(500);
+  })
+})
+
+
+router.put('/ban/:userID', rejectUnauthenticated, (req, res) => {
+
+  const userID = req.params.userID;
+  
+  const queryText = `UPDATE "user" SET "is_approved"=false, "table_published"=false WHERE "id"=$1;`;
+
+  pool.query(queryText, [userID]).then(response => {
+      res.sendStatus(201);
+  }).catch(error => {
+      console.log(`Error making database query ${queryText}`, error);
+      res.sendStatus(500);
+  })
+})
+
+
+
+
 module.exports = router;
