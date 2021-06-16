@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../Header/Header';
 
 function ViewArtifacts() {
 
@@ -23,14 +22,6 @@ function ViewArtifacts() {
 
     return (
         <div>
-            {/* <span>
-                {headerButtons()}
-            </span> */}
-
-
-
-
-
             <table>
                 <thead>
                     <tr>
@@ -80,29 +71,3 @@ function ViewArtifacts() {
 }
 
 export default ViewArtifacts;
-
-/*
-    function headerButtons() {
-
-
-        return (
-            <span>
-                <button onClick={() => history.push('/')}>
-                    Home
-                </button>
-                <button onClick={() => history.push(`/viewartifacts/${userID}`)}>
-                    View by Year
-                </button>
-                <button onClick={() => history.push(`/viewconnections/${userID}`)}>
-                    View by Connection
-                </button>
-                <button>
-                    Add Artifact
-                </button>
-                <button>
-                    Add Connection
-                </button>
-            </span>
-        )
-    }
-*/

@@ -26,13 +26,14 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
   
     let newArtifact = req.body;
 
-            console.log(newArtifact); // Coming in as empty object
+            console.log(newArtifact);
+            console.log('the user is', req.user);
 
 
     const queryText = `INSERT INTO "artifacts" ("artifact", "artifact_description", "earliest_date", "latest_date", "user_id")
                        VALUES ($1, $2, $3, $4, $5);`;
 
-    pool.query(queryText, [newArtifact.artifact, newArtifact.artifact_description, newArtifact.earliest_date, newArtifact.latest_date, req.user]) // req.user
+    pool.query(queryText, [newArtifact.artifact, newArtifact.artifact_description, newArtifact.earliest_date, newArtifact.latest_date, req.user.id]) // req.user
         .then(response => {
             res.sendStatus(201);
         }).catch(error => {
@@ -48,7 +49,7 @@ router.delete('/delete/:deleteID', rejectUnauthenticated, (req,res) => {
 
     const queryText = `DELETE FROM "artifacts" WHERE "id" = $1 AND "user_id" = $2;`;
 
-    pool.query(queryText, [deleteID, req.user]).then(response => {
+    pool.query(queryText, [deleteID, req.user.id]).then(response => {
         res.sendStatus(201);
     }).catch(error => {
         console.log(`Error making database query ${queryText}`, error);

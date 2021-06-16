@@ -6,10 +6,10 @@ function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const currentURL = history.location.pathname;
-    // const params = useParams();
-    // let userID = params.userID;
+    const params = useParams();
+    let userID = params.userID;
 
-    const { userID } = useParams();
+    // const { userID } = useParams();
 
     const user = useSelector((store) => store.user);
 
@@ -68,8 +68,10 @@ function Header() {
                     Home
                 </button>
 
-                    { userID===undefined ? <></> : 
 
+                {user.id && <button onClick={() => history.push(`/viewartifacts/${user.id}`)}>User Data</button>}
+
+                    { userID && 
                         <>
                             <button onClick={() => history.push(`/viewartifacts/${userID}`)}>
                                 View by Year
@@ -78,11 +80,10 @@ function Header() {
                                 View by Connection
                             </button>
                         </>
-
                     }
 
 
-                    { userID===user.id && userID!==undefined ? 
+                    { userID===user.id && userID!==undefined && 
                         <>
                             <button>
                                 Add Artifact
@@ -91,7 +92,7 @@ function Header() {
                                 Add Connection
                             </button>
                         </>
-                    : <></>}
+                    }
                 
 
                 {publishButton}
@@ -119,8 +120,10 @@ function Header() {
             <button onClick={()=>alert(userID)}>
                 Params Tester
             </button>
-            <button onClick={() => console.log(user)}>
-                Log user
+
+            
+            <button onClick={() => console.log(params)}>
+                Tester 2
             </button>
 
             

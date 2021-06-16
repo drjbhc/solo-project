@@ -9,6 +9,8 @@ import connectionSaga from './connections.saga';
 import addArtifactsSaga from './addartifact.saga';
 import addConnectionSaga from './addconnection.saga';
 import adminListSaga from './adminlist.saga';
+import publishSaga from './publish.saga';
+import approveSaga from './approve.saga';
 
 
 export default function* rootSaga() {
@@ -22,5 +24,7 @@ export default function* rootSaga() {
     addArtifactsSaga(),
     addConnectionSaga(),
     adminListSaga(),
+    publishSaga(),
+    approveSaga(),
   ]);
 }
