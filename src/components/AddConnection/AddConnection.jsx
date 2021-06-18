@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from '@material-ui/core/Button';
+
 function AddConnection(){
 
     const dispatch = useDispatch();
@@ -36,7 +38,7 @@ function AddConnection(){
 
     //if (userID === user.id) {
         return (
-            <div>
+            <div className='formspace'>
                 <form onSubmit={(event) => onClick()}>
                     <p>Earlier Artifact:</p>
                         <select onChange = {(event) => setEarliestArtifact(event.target.value)}>
@@ -60,9 +62,9 @@ function AddConnection(){
                     <p>Describe Connection:</p>
                         <input value={connectionDescription} onChange={(event) => setConnectionDescription(event.target.value)} placeholder="Description" />
 
-                    <button type="submit">
+                    <Button variant="contained" type="submit">
                         Submit
-                    </button>
+                    </Button>
                 </form>
             </div>
         )}

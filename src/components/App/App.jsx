@@ -38,7 +38,7 @@ function App() {
       <div>
 
 
-        {/* <Header /> */}
+        {/* Will implement protected routes and uncomment some other page protections once bugs are fixed*/}
 
       <main>
         <Switch>

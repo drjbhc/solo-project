@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from '@material-ui/core/Button';
+
 function viewConnections() {
 
     const history = useHistory();
@@ -39,7 +41,10 @@ function viewConnections() {
 
                     {Number(userID)===user.id &&
                     <td>
-                        <button>DELETE (not working yet)</button>
+                        <Button variant="contained">
+                            {/* DELETE (not working yet) */}
+                            DELETE
+                        </Button>
                     </td>}
 
                 </tr>
@@ -49,13 +54,16 @@ function viewConnections() {
 
     return (
         <div>
-            <select onChange = {(event) => setConnectionID(event.target.value)}>
-                {dropDown.map(item => {
-                    return (
-                        <option value={item.id}>{item.artifact}</option>
-                    )
-                })}
-            </select>
+            <div className="backgroundtext">
+                <span>View connections related to: </span>
+                <select onChange = {(event) => setConnectionID(event.target.value)}>
+                    {dropDown.map(item => {
+                        return (
+                            <option value={item.id}>{item.artifact}</option>
+                        )
+                    })}
+                </select>
+            </div>
 
             
 
@@ -78,7 +86,7 @@ function viewConnections() {
                         <th>
                             Delete
                         </th>}
-                        
+
                     </tr>
                 </thead>
                 <tbody>

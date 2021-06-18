@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 
+import Button from '@material-ui/core/Button';
+
 function AddArtifact() {
 
     const user = useSelector((store) => store.user);
@@ -41,7 +43,7 @@ function AddArtifact() {
 
     //if (userID === user.id) {
         return(
-            <div>
+            <div className='formspace'>
                 <form onSubmit={(event) => onClick()}>
                     <p>Name:</p>
                         <input value={artifactName} onChange={(event) => setArtifactName(event.target.value)} placeholder="Name" />
@@ -52,9 +54,9 @@ function AddArtifact() {
                     <p>Latest Date:</p>
                         <input value={latestDate} onChange={(event) => setLatestDate(event.target.value)} placeholder="YYYY CE / YYYY BCE"/>
 
-                    <button type="submit">
+                    <Button variant="contained" type="submit">
                         Submit
-                    </button>
+                    </Button>
                 </form>
             </div>
         )}

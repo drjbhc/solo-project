@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './Header.css';
 
+import Button from '@material-ui/core/Button';
+
 function Header() {
 
     const history = useHistory();
@@ -14,7 +16,7 @@ function Header() {
     const user = useSelector((store) => store.user);
 
     function headerText() {
-        if ( currentURL.includes('viewartifacts') ) return <h1>View by Year</h1>
+        if ( currentURL.includes('viewartifacts') ) return <h1>View Documents/Events</h1> /* View by Year if slider is implemented*/
         if ( currentURL.includes('viewconnections') ) return <h1>View by Connections</h1>
         if ( currentURL.includes('addartifact') ) return <h1>Add new Artifact</h1>
         if ( currentURL.includes('addconnection') ) return <h1>Add new Connection</h1>
@@ -50,10 +52,10 @@ function Header() {
 
     function publishButton(){
         if (Number(userID)===user.id && user.table_published===false){
-            return (<button onClick={() => publish()}>Publish</button>)
+            return (<Button variant="contained" onClick={() => publish()}>Publish</Button>)
         }
         else if (Number(userID)===user.id && user.table_published===true){
-            return (<button onClick={() => publish()}>Unpublish</button>)
+            return (<Button variant="contained" onClick={() => publish()}>Unpublish</Button>)
         }
     }
 
@@ -64,33 +66,33 @@ function Header() {
 
         return (
             <span>
-                <button onClick={() => history.push('/')}>
+                <Button variant="contained" onClick={() => history.push('/')}>
                     Home
-                </button>
+                </Button>
 
 
-                {user.id && <button onClick={() => history.push(`/viewartifacts/${user.id}`)}>User Data</button>}
+                {user.id && <Button variant="contained" onClick={() => history.push(`/viewartifacts/${user.id}`)}>User Data</Button>}
 
                     { userID && 
                         <>
-                            <button onClick={() => history.push(`/viewartifacts/${userID}`)}>
-                                View by Year
-                            </button>
-                            <button onClick={() => history.push(`/viewconnections/${userID}`)}>
+                            <Button variant="contained" onClick={() => history.push(`/viewartifacts/${userID}`)}> {/* View by Year */}
+                                View Documents/Events
+                            </Button>
+                            <Button variant="contained" onClick={() => history.push(`/viewconnections/${userID}`)}>
                                 View by Connection
-                            </button>
+                            </Button>
                         </>
                     }
 
 
                     { Number(userID)===user.id && userID!==undefined && 
                         <>
-                            <button onClick={() => history.push(`/addartifact/${userID}`)}>
+                            <Button variant="contained" onClick={() => history.push(`/addartifact/${userID}`)}>
                                 Add Artifact
-                            </button>
-                            <button onClick={() => history.push(`/addconnection/${userID}`)}>
+                            </Button>
+                            <Button variant="contained" onClick={() => history.push(`/addconnection/${userID}`)}>
                                 Add Connection
-                            </button>
+                            </Button>
                         </>
                     }
                 
@@ -98,7 +100,7 @@ function Header() {
                 {publishButton()}
 
 
-                { user.id ? <button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</button> : <button onClick={() => history.push('/login')}>Login / Register</button>}
+                { user.id ? <Button variant="contained" onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</Button> : <Button variant="contained" onClick={() => history.push('/login')}>Login / Register</Button>}
             </span>
         )
     }
@@ -111,7 +113,7 @@ function Header() {
         <header>
             <div>
                 {headerText()}
-                    {user.id && <span>Welcome {user.username}</span>}
+                    {user.id && <span className='welcome'>Welcome {user.username}</span>}
             </div>
             <span className='nav-btn'>
                 {headerButtons()}

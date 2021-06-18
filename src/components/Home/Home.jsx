@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from '@material-ui/core/Button';
+
 function Home() {
 
     const history = useHistory();
@@ -36,9 +38,9 @@ function Home() {
                                     {entry.username}
                                 </td>
                                 <td>
-                                    <button onClick={() => history.push(`/viewartifacts/${entry.id}`)}>
+                                    <Button variant="contained" onClick={() => history.push(`/viewartifacts/${entry.id}`)}>
                                         View data
-                                    </button>
+                                    </Button>
                                 </td>
                             </tr>
                         )

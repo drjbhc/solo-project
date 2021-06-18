@@ -66,10 +66,10 @@ router.get('/userlist', rejectUnauthenticated, (req, res) => { // Admin page to 
   */
 
       console.log(req.user)
-  if (req.user.id < 10) {
-      res.sendStatus(403);
-      return;
-  }
+  // if (req.user.id !== 10) {
+  //     res.sendStatus(403);
+  //     return;
+  // }
 
   const queryText = `SELECT "id", "username", "is_approved", "application_comments" FROM "user";`;
 
@@ -113,6 +113,8 @@ router.put('/publish', rejectUnauthenticated, (req, res) => {
 router.put('/approve/:userID', rejectUnauthenticated, (req, res) => {
 
   const userID = req.params.userID;
+
+  console.log('The user id is', userID);
   
   const queryText = `UPDATE "user" SET "is_approved"=true WHERE "id"=$1;`;
 

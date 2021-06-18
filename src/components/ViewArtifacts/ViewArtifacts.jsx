@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Button from '@material-ui/core/Button';
+
 function ViewArtifacts() {
 
     const history = useHistory();
@@ -61,9 +63,10 @@ function ViewArtifacts() {
 
                                 {Number(userID)===user.id &&
                                 <td>
-                                    <button>
-                                        DELETE (not yet functional)
-                                    </button>
+                                    <Button variant="contained">
+                                        {/* DELETE (not yet functional) */}
+                                        DELETE
+                                    </Button>
                                 </td>}
 
                             </tr>

@@ -2,12 +2,12 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-function* approveMember(action) {
+function* banMember(action) {
     try {
         console.log(action.payload);
 
         console.log('the payload is', action.payload);
-        const response = yield axios.put(`/api/user/approve/${action.payload}`)
+        const response = yield axios.put(`/api/user/ban/${action.payload}`)
 
         yield put({ type: 'FETCH_USERLIST', payload: response.data})
     } catch (error) {
@@ -15,8 +15,8 @@ function* approveMember(action) {
     }
 }
 
-function* approveSaga() {
-    yield takeEvery('APPROVE_MEMBER', approveMember);
+function* banSaga() {
+    yield takeEvery('BAN_MEMBER',banMember);
 }
 
-export default approveSaga;
+export default banSaga;

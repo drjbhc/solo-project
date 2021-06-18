@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 
+import Button from '@material-ui/core/Button';
+
 function Admin(){
 
     const userList = useSelector((store) => store.userListReducer);
@@ -16,6 +18,15 @@ function Admin(){
         if (confirm('Approve member?')){
             dispatch({
                 type: 'APPROVE_MEMBER',
+                payload: userID
+              })
+        }
+    }
+
+    function banMember(userID){
+        if (confirm('Ban member?')){
+            dispatch({
+                type: 'BAN_MEMBER',
                 payload: userID
               })
         }
@@ -49,7 +60,7 @@ function Admin(){
                                     {user.application_comments}
                                 </td>
                                 <td>
-                                    {user.is_approved ? <button>Ban Member</button>: <button onClick={() => approveMember(user.id)}>Approve Member</button>}
+                                    {user.is_approved ? <Button variant="contained" onClick={() => banMember(user.id)}>Ban Member</Button>: <Button variant="contained" onClick={() => approveMember(user.id)}>Approve Member</Button>}
                                 </td>
                             </tr>
                         )

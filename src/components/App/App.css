@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
+
 body{
   background-image:url('background.jpg');
   background-position:center top;
@@ -47,4 +49,19 @@ tbody tr:last-child td:last-child {
 }
 tbody tr:last-child td:only-child {
   border-radius: 0 0 25px 25px;
+}
+
+
+.formspace {
+  background-color: white;
+  padding: 15px;
+  margin-left: 25%;
+  margin-right: 25%;
+  border-radius: 25px;
+  filter: drop-shadow(16px 16px 10px black);
+}
+
+.backgroundtext {
+  margin-bottom: 5px;
+  font-weight: bold;
 }
