@@ -7,7 +7,7 @@ function* addArtifacts(action) {
         console.log(action.payload);
         const response = yield axios.post(`/api/artifacts/add`, action.payload)
 
-        yield put({ type: 'FETCH_ARTIFACT_LIST', payload: response.data})
+        yield put({ type: 'FETCH_ARTIFACT_LIST', payload: response.data}) // Need to set payload to userID
     } catch (error) {
         console.log('User get request failed', error);
     }

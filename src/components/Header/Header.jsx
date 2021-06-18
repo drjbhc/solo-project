@@ -1,6 +1,8 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './Header.css';
+
 function Header() {
 
     const history = useHistory();
@@ -8,8 +10,6 @@ function Header() {
     const currentURL = history.location.pathname;
     const params = useParams();
     let userID = params.userID;
-
-    // const { userID } = useParams();
 
     const user = useSelector((store) => store.user);
 
@@ -49,10 +49,10 @@ function Header() {
     
 
     function publishButton(){
-        if (userID===user.id && user.table_published===false){
+        if (Number(userID)===user.id && user.table_published===false){
             return (<button onClick={() => publish()}>Publish</button>)
         }
-        else if (userID===user.id && user.table_published===true){
+        else if (Number(userID)===user.id && user.table_published===true){
             return (<button onClick={() => publish()}>Unpublish</button>)
         }
     }
@@ -83,19 +83,19 @@ function Header() {
                     }
 
 
-                    { userID===user.id && userID!==undefined && 
+                    { Number(userID)===user.id && userID!==undefined && 
                         <>
-                            <button>
+                            <button onClick={() => history.push(`/addartifact/${userID}`)}>
                                 Add Artifact
                             </button>
-                            <button>
+                            <button onClick={() => history.push(`/addconnection/${userID}`)}>
                                 Add Connection
                             </button>
                         </>
                     }
                 
 
-                {publishButton}
+                {publishButton()}
 
 
                 { user.id ? <button onClick={() => dispatch({ type: 'LOGOUT' })}>Logout</button> : <button onClick={() => history.push('/login')}>Login / Register</button>}
@@ -113,20 +113,9 @@ function Header() {
                 {headerText()}
                     {user.id && <span>Welcome {user.username}</span>}
             </div>
-            <span>
+            <span className='nav-btn'>
                 {headerButtons()}
             </span>
-
-            <button onClick={()=>alert(userID)}>
-                Params Tester
-            </button>
-
-            
-            <button onClick={() => console.log(params)}>
-                Tester 2
-            </button>
-
-            
         </header>
     )
 }

@@ -9,6 +9,7 @@ function ViewArtifacts() {
     const dispatch = useDispatch();
 
     const tableList = useSelector(store => store.artifactReducer);
+    const user = useSelector((store) => store.user);
 
     let userID = params.userID;
 
@@ -34,9 +35,12 @@ function ViewArtifacts() {
                         <th>
                             Date of composition
                         </th>
+
+                        {Number(userID)===user.id &&
                         <th>
                             Delete
-                        </th>
+                        </th>}
+
                     </tr>
                 </thead>
                 <tbody>
@@ -54,11 +58,14 @@ function ViewArtifacts() {
                                 <td>
                                     {entry.earliest_date} - {entry.latest_date}
                                 </td>
+
+                                {Number(userID)===user.id &&
                                 <td>
                                     <button>
                                         DELETE (not yet functional)
                                     </button>
-                                </td>
+                                </td>}
+
                             </tr>
                         )
                     })}

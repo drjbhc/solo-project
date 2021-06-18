@@ -16,7 +16,7 @@ router.post('/add', rejectUnauthenticated, (req, res) => {
     const queryText = `INSERT INTO "connections" ("earlier_artifact", "later_artifact", "connection_description", "user_id")
                         VALUES ($1, $2, $3, $4);`;
 
-    pool.query(queryText, [newConnection.earlier, newConnection.later, newConnection.description, user.id]).then(response => {
+    pool.query(queryText, [newConnection.earlier_artifact, newConnection.later_artifact, newConnection.connection_description, req.user.id]).then(response => {
         res.sendStatus(201);
     }).catch(error => {
         console.log(`Error making database query ${queryText}`, error);
@@ -37,6 +37,7 @@ router.get('/list/:userID', (req, res) => {
                         WHERE "connections"."user_id"=$1;`;
 
     pool.query(queryText, [userID]).then(response => {
+                console.log(response.rows);
         res.send(response.rows);
     }).catch(error => {
         console.log(`Error making database query ${queryText}`, error);
@@ -49,7 +50,7 @@ router.delete('/delete/:deleteID', rejectUnauthenticated, (req, res) => {
 
     const queryText = `DELETE FROM "connections" WHERE "id" = $1 AND "user_id" = $2;`;
 
-    pool.query(queryText, [deleteID, req.user]).then(response => {
+    pool.query(queryText, [deleteID, req.user.id]).then(response => {
         res.sendStatus(201);
     }).catch(error => {
         console.log(`Error making database query ${queryText}`, error);

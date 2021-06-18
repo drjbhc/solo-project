@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function* addConnection(action) {
     try {
+        console.log('the payload is', action.payload);
         const response = yield axios.post(`/api/connections/add`, action.payload)
 
         yield put({ type: 'FETCH_CONNECTION_LIST', payload: response.data})

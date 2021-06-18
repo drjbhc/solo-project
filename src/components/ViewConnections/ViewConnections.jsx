@@ -10,10 +10,11 @@ function viewConnections() {
 
     const tableList = useSelector(store => store.connectionReducer);
     const dropDown = useSelector(store => store.artifactReducer);
+    const user = useSelector((store) => store.user);
 
     let userID = params.userID;
 
-    const [connectionID, setConnectionID] = useState(0);
+    const [connectionID, setConnectionID] = useState(1);
 
     useEffect(() => {
         dispatch({
@@ -35,9 +36,12 @@ function viewConnections() {
                     <td>
                         {connection.connection_description}
                     </td>
+
+                    {Number(userID)===user.id &&
                     <td>
                         <button>DELETE (not working yet)</button>
-                    </td>
+                    </td>}
+
                 </tr>
             )
           }
@@ -53,6 +57,8 @@ function viewConnections() {
                 })}
             </select>
 
+            
+
 
 
             <table>
@@ -67,9 +73,12 @@ function viewConnections() {
                         <th>
                             Connection Description
                         </th>
+
+                        {Number(userID)===user.id &&
                         <th>
                             Delete
-                        </th>
+                        </th>}
+                        
                     </tr>
                 </thead>
                 <tbody>

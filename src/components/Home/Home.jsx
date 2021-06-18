@@ -26,9 +26,6 @@ function Home() {
                         <th>
                             Link
                         </th>
-                        <th>
-                            Delete
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,11 +38,6 @@ function Home() {
                                 <td>
                                     <button onClick={() => history.push(`/viewartifacts/${entry.id}`)}>
                                         View data
-                                    </button>
-                                </td>
-                                <td>
-                                    <button>
-                                        DELETE (not yet functional)
                                     </button>
                                 </td>
                             </tr>

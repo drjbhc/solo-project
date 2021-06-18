@@ -38,39 +38,36 @@ function App() {
       <div>
 
 
-        <Header />
+        {/* <Header /> */}
 
-
+      <main>
         <Switch>
           <Redirect exact from="/" to="/home" />
 
                 <Route path='/viewartifacts/:userID'>
+                <Header />
                     <ViewArtifacts />
                 </Route>
                 <Route path='/viewconnections/:userID'>
+                <Header />
                     <ViewConnections />
                 </Route>
                 <Route path='/addartifact/:userID'>
+                <Header />
                     <AddArtifact />
                 </Route>
                 <Route path='/addconnection/:userID'>
+                <Header />
                     <AddConnection />
                 </Route>
                 <Route path='/admin'>
+                <Header />
                     <Admin />
                 </Route>
                 <Route exact path='/home'>
+                <Header />
                     <Home />
                 </Route>
-
-
-
-
-
-
-
-
-
 
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -82,6 +79,7 @@ function App() {
             exact
             path="/user"
           >
+            <Header />
             <UserPage />
           </ProtectedRoute>
 
@@ -96,6 +94,7 @@ function App() {
             path="/login"
             authRedirect="/home"
           >
+            <Header />
             <LoginPage />
           </ProtectedRoute>
 
@@ -107,14 +106,18 @@ function App() {
             path="/registration"
             authRedirect="/home"
           >
+            <Header />
             <RegisterPage />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
+          <Header />
             <h1>404</h1>
           </Route>
         </Switch>
+      </main>
+
         <Footer />
       </div>
     </Router>

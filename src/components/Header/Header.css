@@ -1,0 +1,12 @@
+header {
+    text-align: center;
+    padding: 5px;
+    margin: 25px;
+    background-color: white;
+    border-radius: 25px;
+    filter: drop-shadow(16px 16px 10px black);
+}
+
+.nav-btn {
+    text-align: end;
+}
