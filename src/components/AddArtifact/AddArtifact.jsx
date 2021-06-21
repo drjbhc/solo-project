@@ -54,6 +54,8 @@ function AddArtifact() {
                     <p>Latest Date:</p>
                         <input value={latestDate} onChange={(event) => setLatestDate(event.target.value)} placeholder="YYYY CE / YYYY BCE"/>
 
+                        <br /><br />
+
                     <Button variant="contained" type="submit">
                         Submit
                     </Button>

@@ -11,7 +11,9 @@ function viewConnections() {
     const dispatch = useDispatch();
 
     const tableList = useSelector(store => store.connectionReducer);
+
     const dropDown = useSelector(store => store.artifactReducer);
+    
     const user = useSelector((store) => store.user);
 
     let userID = params.userID;
@@ -23,6 +25,10 @@ function viewConnections() {
           type: 'FETCH_CONNECTION_LIST',
           payload: userID
         })
+        dispatch({
+            type: 'FETCH_ARTIFACT_LIST',
+            payload: userID
+          })
       }, [])
 
       function connectionDisplay(connection, i){
@@ -56,7 +62,8 @@ function viewConnections() {
         <div>
             <div className="backgroundtext">
                 <span>View connections related to: </span>
-                <select onChange = {(event) => setConnectionID(event.target.value)}>
+                <select onChange = {(event) => setConnectionID(Number(event.target.value))}>
+                            <option value={0}></option>
                     {dropDown.map(item => {
                         return (
                             <option value={item.id}>{item.artifact}</option>

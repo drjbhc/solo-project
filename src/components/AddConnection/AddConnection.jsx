@@ -7,12 +7,22 @@ import Button from '@material-ui/core/Button';
 function AddConnection(){
 
     const dispatch = useDispatch();
+    const params = useParams();
+
+    let userID = params.userID;
 
     const dropDown = useSelector(store => store.artifactReducer);
 
     const [earlierArtifact, setEarliestArtifact] = useState(0);
     const [latestArtifact, setLatestArtifact] = useState(0);
     const [connectionDescription, setConnectionDescription] = useState('');
+
+    useEffect(() => {
+        dispatch({
+          type: 'FETCH_ARTIFACT_LIST',
+          payload: userID
+        })
+      }, [userID])
 
     function onClick() {
         event.preventDefault();
@@ -61,6 +71,8 @@ function AddConnection(){
 
                     <p>Describe Connection:</p>
                         <input value={connectionDescription} onChange={(event) => setConnectionDescription(event.target.value)} placeholder="Description" />
+
+                            <br /><br />
 
                     <Button variant="contained" type="submit">
                         Submit

@@ -20,8 +20,7 @@ function ViewArtifacts() {
           type: 'FETCH_ARTIFACT_LIST',
           payload: userID
         })
-      }, [])
-
+      }, [userID])
 
     return (
         <div>

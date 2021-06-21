@@ -71,7 +71,9 @@ function Header() {
                 </Button>
 
 
-                {user.id && <Button variant="contained" onClick={() => history.push(`/viewartifacts/${user.id}`)}>User Data</Button>}
+                {user.id && <Button variant="contained" onClick={() => history.push(`/viewartifacts/${user.id}`)}>{user.username}'s page</Button>}
+
+                {user.access_level === 10 && <Button variant="contained" onClick={() => history.push('/admin')}>Admin Page</Button>}
 
                     { userID && 
                         <>

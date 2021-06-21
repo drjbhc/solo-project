@@ -8,6 +8,7 @@ function* publishTable(action) {
         const response = yield axios.put(`/api/user/publish`)
 
         yield put({ type: 'FETCH_HOMELIST'})
+        yield put({ type: 'FETCH_USER' });
     } catch (error) {
         console.log('User get request failed', error);
     }
